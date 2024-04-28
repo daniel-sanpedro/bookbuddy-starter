@@ -1,9 +1,9 @@
 // /login and /register (This could alternatively be displayed in the profile instead of living in its own route.)
 
 import React from 'react'
-import person-icon from "../assets/person-icon"
-import email-icon from "../assets/email-icon"
-import password-icon from "../assets/password-icon"
+// import person-icon from "../assets/login/person-icon"
+// import email-icon from "../assets/login/email-icon"
+// import password-icon from "../assets/login/password-icon"
 
 
 
