@@ -3,6 +3,7 @@ import { Link, BrowserRouter as Router } from "react-router-dom";
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -20,16 +21,41 @@ const BookList = () => {
     fetchBooks();
   }, []);
 
+  const handleBookClick = (book) => {
+    setSelectedBook(book);
+  };
+
   return (
     <div>
-      <h2>Book List</h2>
-      <ul>
-        {books.map((book) => (
-          <li key={book.id}>
-            <Link to={`/book/${book.id}`}>{book.title}</Link>
-          </li>
-        ))}
-      </ul>
+      {selectedBook ? (
+        <div>
+          <h2>{selectedBook.title}</h2>
+          <p>Author: {selectedBook.author}</p>
+          <img
+            src={selectedBook.coverimage}
+            alt={`Cover of ${selectedBook.title}`}
+            style={{ width: "100px", height: "150px" }}
+          />
+          <p>{selectedBook.description}</p>
+          <p>{selectedBook.available ? "Available" : "Checked Out"}</p>
+          <button onClick={() => setSelectedBook(null)}>
+            Back to Books List
+          </button>
+        </div>
+      ) : books.length > 0 ? (
+        books.map((book) => (
+          <div
+            key={book.id}
+            onClick={() => handleBookClick(book)}
+            style={{ cursor: "pointer" }}
+          >
+            <h2>{book.title}</h2>
+            <p>Author: {book.author}</p>
+          </div>
+        ))
+      ) : (
+        <p>No books available.</p>
+      )}
     </div>
   );
 };
