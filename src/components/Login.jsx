@@ -13,7 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const Login = () => {
     setIsLoading(true);
 
     const loginEndpoint =
-      "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/login";
+      "https://fsa-book-buddy-b6e748d1380d.herokuapp.com//api/users/login";
 
     try {
       const response = await fetch(loginEndpoint, {
@@ -39,13 +39,13 @@ const Login = () => {
         throw new Error(data.message || "Failed to login");
       }
 
-      localStorage.setItem("token", data.token); // Store the token
+      localStorage.setItem("token", data.token);
 
       if (onLoginSuccess) {
         onLoginSuccess(data);
       }
 
-      navigate("/account"); // Use navigate to redirect to the account page
+      navigate("/account");
     } catch (error) {
       setError(error.message);
       console.error("Login error:", error);
